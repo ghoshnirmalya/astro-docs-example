@@ -15,9 +15,13 @@ const githubEditUrl = `https://github.com/USER/REPO/blob/main/${currentFile}`
 // Full Astro Component Syntax:
 // https://github.com/snowpackjs/astro/blob/main/docs/core-concepts/astro-components.md
 ---
-<html>
+<html lang="en">
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Example site to demonstrate how Astro works.">
+
     <title>{content.title}</title>
+
     <link rel="icon"
           type="image/svg+xml"
           href="/favicon.svg">
@@ -26,7 +30,7 @@ const githubEditUrl = `https://github.com/USER/REPO/blob/main/${currentFile}`
     <link rel="stylesheet" href="/code.css" type="text/css" />
   </head>
 
-  <body class="text-sm">
+  <body>
     <Navbar/>
     <div class="mx-auto p-4 max-w-2xl">
       <main class="space-y-4">
