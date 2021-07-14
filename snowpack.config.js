@@ -3,15 +3,6 @@
 
 /** @type {import("snowpack").SnowpackUserConfig } */
 module.exports = {
-  mount: {
-    /* ... */
-  },
-  packageOptions: {
-    /* ... */
-  },
-  buildOptions: {
-    /* ... */
-  },
   devOptions: {
     tailwindConfig: "./tailwind.config.js",
   },
