@@ -21,10 +21,11 @@ const githubEditUrl = `https://github.com/USER/REPO/blob/main/${currentFile}`
     <link rel="icon"
           type="image/svg+xml"
           href="/favicon.svg">
-    <link rel="stylesheet" href="/prism.css" />
+    <link rel="stylesheet" href="/prism.css" type="text/css" />
+    <link rel="stylesheet" href="/tailwind.css" type="text/css" />
   </head>
 
-  <body>
+  <body class="bg-gray-100">
     <main>
       <h1>{content.title}</h1>
       <slot />
