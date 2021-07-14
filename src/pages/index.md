@@ -45,13 +45,13 @@ The default Astro project has the following `scripts` in the `/package.json` fil
 
 For local development, run:
 
-```
+```bash
 npm run start
 ```
 
 To build for production, run the following command:
 
-```
+```bash
 npm run build
 ```
 
