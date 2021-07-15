@@ -1,22 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { FC } from "react";
 import { Todo } from "../types/todo";
 
-const TodoReact = () => {
-  const [todo, setTodo] = useState<Todo>({});
+interface IProps {
+  todo: Todo;
+}
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(
-        "https://jsonplaceholder.typicode.com/todos/1"
-      );
-      const data = await response.json();
-
-      setTodo(data);
-    };
-
-    fetchData();
-  }, []);
-
+const TodoReact: FC<IProps> = ({ todo }) => {
   if (!todo.id) {
     return <div className="p-4 bg-gray-50">Loading...</div>;
   }
