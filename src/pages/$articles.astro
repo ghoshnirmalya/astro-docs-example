@@ -10,19 +10,25 @@ export async function createCollection() {
       }
     }
   );
-  const articles = await response.json();
 
-  console.log(articles)
+  if (response.ok) {
+    const articles = await response.json();
 
-  return {
-    route: `/articles/:id`,
-    paths() {
-      return articles.map((article) => ({params: {id: article.id}}));
-    },
-    async props({ params }) {
-      return {article: articles.find((article) => article.id === params.id)};
-    },
-  };
+    return {
+      route: `/articles/:slug`,
+      paths() {
+        return articles.map((article) => ({params: {slug: article.slug}}));
+      },
+      async props({ params }) {
+
+        return {
+          article: articles.find((article) => article.slug === params.slug)
+        };
+      },
+    };
+  } else {
+    console.log(response)
+  }
 }
 
 const {article} = Astro.props;
