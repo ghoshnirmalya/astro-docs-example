@@ -12,9 +12,19 @@ const articles = await response.json();
 ---
 
 <Layout>
-  <div class="space-y-4">{articles.map(article => {
+  <div class="space-y-8">{articles.map(article => {
     return (
-      <a href={`/articles/${article.slug}`} class="block">{article.title}</a>
+      <a href={`/articles/${article.slug}`} class="flex flex-col space-y-2 p-4 bg-white shadow-sm hover:shadow-md rounded">
+        {article.cover_image &&
+          <img
+            src={article.cover_image}
+            alt={article.title}
+            class="rounded"
+          />
+        }
+        <h2>{article.title}</h2>
+        <p>{article.description}</p>
+      </a>
     )
   })}</div>
 </Layout>
