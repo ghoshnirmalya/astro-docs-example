@@ -1,0 +1,35 @@
+---
+import Layout from "../layouts/Main.astro"
+import { Markdown, Prism } from 'astro/components';
+
+export async function createCollection() {
+  const response = await fetch(
+    "https://dev.to/api/articles/me", {
+      headers: {
+        "api-key": process.env.DEV_API_KEY
+      }
+    }
+  );
+  const articles = await response.json();
+
+  return {
+    route: `/articles/:id`,
+    paths() {
+      return articles.map((article, i) => ({params: {id: article.id}}));
+    },
+
+    async props({ params }) {
+      return {article: articles.find((article) => article.id === params.id)};
+    },
+  };
+}
+
+const {article} = Astro.props;
+---
+
+<Layout>
+  <div class="space-y-4">
+    <h1>{article.title}</h1>
+    <Markdown content={article.body_markdown} />
+  </div>
+</Layout>
