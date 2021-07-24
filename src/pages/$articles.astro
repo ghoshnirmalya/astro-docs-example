@@ -4,40 +4,61 @@ import { Markdown, Prism } from 'astro/components';
 
 export async function createCollection() {
   const response = await fetch(
-    "https://dev.to/api/articles/me", {
-      headers: {
-        "api-key": import.meta.env.SNOWPACK_PUBLIC_DEV_API_KEY
-      }
-    }
+    "https://dev.to/api/articles"
   );
+  const allArticles = await response.json();
 
-  if (response.ok) {
-    const articles = await response.json();
-
-    return {
-      route: `/articles/:slug`,
-      paths() {
-        return articles.map((article) => ({params: {slug: article.slug}}));
-      },
-      async props({ params }) {
-
-        return {
-          article: articles.find((article) => article.slug === params.slug)
-        };
-      },
-    };
-  } else {
-    console.log(response)
-  }
+  return {
+    paginate: true,
+    route: '/articles/:page?',
+    paths() {
+      return allArticles.map((article) => ({params: {slug: article.slug}}));
+    },
+    async props({paginate}) {
+      return {
+        articles: paginate(allArticles, {pageSize: 10}),
+      };
+    },
+  };
 }
 
-const {article} = Astro.props;
+const {articles, article} = Astro.props;
 ---
 
 <Layout>
   <div class="space-y-8">
-    <h1>{article.title}</h1>
-    <Markdown content={article.body_markdown} />
+    {articles.data.map(article => {
+      return (
+        <a href={`/articles/${article.slug}`} class="flex flex-col space-y-2 p-4 bg-white shadow-sm hover:shadow-md rounded">
+          {article.cover_image &&
+            <img
+              src={article.cover_image}
+              alt={article.title}
+              class="rounded"
+            />
+          }
+          <h2>{article.title}</h2>
+          <p>{article.description}</p>
+        </a>
+      )
+    })}
+    <nav class="flex space-x-4 justify-between">
+      <a
+        class="px-4 py-2 bg-white shadow-sm hover:shadow-md rounded"
+        href={articles.url.prev}
+        disabled={articles.page.current === 1}
+        aria-disabled={articles.page.current === 1}
+      >
+        Previous
+      </a>
+      <a
+        class="px-4 py-2 bg-white shadow-sm hover:shadow-md rounded"
+        href={articles.url.next}
+        disabled={articles.page.current === articles.page.last}
+        aria-disabled={articles.page.current === articles.page.last}
+      >
+        Next
+      </a>
+    </nav>
   </div>
 </Layout>
-
