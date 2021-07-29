@@ -1,28 +1,32 @@
-# Astro Starter Kit: Docs Site
+This is a starting point for building awesome documentation websites using [Astro](https://astro.build/).
 
+## Requirements
+
+1. [Node.js](https://nodejs.org/)
+2. [npm](https://www.npmjs.com/)
+
+## Installation
+
+### 1. **Clone the application**
+
+```sh
+git clone git@github.com:ghoshnirmalya/astro-docs-example.git && cd astro-docs-example
 ```
-npm init astro --template docs
+
+### 2. **Install necessary dependencies for the frontend application**
+
+```sh
+npm install
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+### 3. **Start the application**
 
-Features:
+```sh
+npm run start
+```
 
-- ✅ CSS Grid Layout
-- ✅ Full Markdown support
-- ✅ Automatic header navigation sidebar
-- ✅ Dark mode enabled by default
+The above command will start the frontend application on [http://localhost:3000/](http://localhost:3000).
 
-## 🧞 Commands
+## License
 
-All commands are run from the root of the project, from a terminal:
-
-| Command         | Action                                      |
-|:----------------|:--------------------------------------------|
-| `npm install`   | Installs dependencies                       |
-| `npm run start` | Starts local dev server at `localhost:3000` |
-| `npm run build` | Build your production site to `./dist/`     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://github.com/snowpackjs/astro) or jump into our [Discord server](https://astro.build/chat).
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
